@@ -37,6 +37,27 @@ exports.findAttractionsByName = function(req, res){
     var queryResp = [];
 };
 
+exports.createAttraction = function(req, res) {
+    
+    var attraction_name = req.body.attraction_name;
+    var attraction_desc = req.body.attraction_desc;
+    var attraction_lat = req.body.attraction_lat;
+    var attraction_lng = req.body.attraction_lng;
+
+    connection
+    .run("CREATE (t:TempatWisata { NamaTempatWisata: '"+attraction_name+
+                                "', Deskripsi: '"+attraction_desc+
+                                "', Latitude: '"+attraction_lat+
+                                "', Longitude: '"+attraction_lng+"'})")
+    .then(function(result){    
+            response.ok("Berhasil menambahkan user!", res);    
+            connection.close();            
+    })
+    .catch(function(err){
+        console.log(err)
+    });
+};
+
 exports.index = function(req, res) {
     response.ok("Hello from the Node JS RESTful side!", res)
 };

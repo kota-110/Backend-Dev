@@ -11,4 +11,7 @@ module.exports = function(app) {
 
     app.route('/attractions/:attraction_name')
         .get(attractionList.findAttractionsByName);
+
+    app.route('/attractions')
+        .post(attractionList.createAttraction);
 };
