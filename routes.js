@@ -8,4 +8,7 @@ module.exports = function(app) {
 
     app.route('/attractions')
         .get(attractionList.attractions);
+
+    app.route('/attractions/:attraction_name')
+        .get(attractionList.findAttractionsByName);
 };
