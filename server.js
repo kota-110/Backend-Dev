@@ -1,7 +1,14 @@
-const express = require('express')
-const app = express()
-const port = 3000
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || 3000,
+    bodyParser = require('body-parser'),
+    controller = require('./controller');
 
-app.get('/', (req, res) => res.send('Hello Gais!'))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.listen(port, () => console.log(`App listening on port ${port}!`))
+var routes = require('./routes');
+routes(app);
+
+app.listen(port);
+console.log('RESTful Api server started on : ' + port);
