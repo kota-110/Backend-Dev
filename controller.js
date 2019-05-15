@@ -46,7 +46,7 @@ exports.createAttraction = function(req, res) {
 
     connection
     .run("CREATE (t:TempatWisata { NamaTempatWisata: '"+attraction_name+
-                                "', Deskripsi: '"+attraction_desc+
+                                "', DeskripsiTempatWisata: '"+attraction_desc+
                                 "', Latitude: '"+attraction_lat+
                                 "', Longitude: '"+attraction_lng+"'})")
     .then(function(result){    
@@ -59,5 +59,5 @@ exports.createAttraction = function(req, res) {
 };
 
 exports.index = function(req, res) {
-    response.ok("Hello from the Node JS RESTful side!", res)
+    response.ok("Hai Gais !", res)
 };
