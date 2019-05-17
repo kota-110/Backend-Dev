@@ -50,7 +50,22 @@ exports.createAttraction = function(req, res) {
                                 "', Latitude: '"+attraction_lat+
                                 "', Longitude: '"+attraction_lng+"'})")
     .then(function(result){    
-            response.ok("Berhasil menambahkan user!", res);    
+            response.ok("Berhasil menambahkan Tempat Wisata!", res);    
+            connection.close();            
+    })
+    .catch(function(err){
+        console.log(err)
+    });
+};
+
+exports.deleteAttraction = function(req, res) {
+    
+    var attraction_name = req.body.attraction_name;
+
+    connection
+    .run("MATCH (t:TempatWisata { NamaTempatWisata: '"+ attraction_name +"' }) DELETE t")
+    .then(function(result){    
+            response.ok("Berhasil menghapus Tempat Wisata!", res);    
             connection.close();            
     })
     .catch(function(err){
