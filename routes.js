@@ -16,5 +16,8 @@ module.exports = function(app) {
         .post(attractionList.createAttraction);
 
     app.route('/attractions')
+        .put(attractionList.updateAttraction);
+
+    app.route('/attractions')
         .delete(attractionList.deleteAttraction);
 };
