@@ -1,7 +1,7 @@
 'use strict';
 
-var response = require('./res');
-var connection = require('./conn');
+var response = require('../res');
+var connection = require('../db/connection/conn');
 var queryResp = [];                     //array for storing array of response
 
 exports.attractions = function(req, res){

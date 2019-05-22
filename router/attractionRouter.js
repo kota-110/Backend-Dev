@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-    var attractionList = require('./controller');
+    var attractionList = require('../controllers/attractionController');
 
     app.route('/')
         .get(attractionList.index);
