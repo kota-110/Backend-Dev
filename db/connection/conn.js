@@ -1,6 +1,7 @@
 var neo4j = require('neo4j-driver').v1
+require('dotenv').config();
 
-var con = neo4j.driver('bolt://hobby-aekopbghpjjagbkeegcmcdcl.dbs.graphenedb.com:24787', neo4j.auth.basic('neo4j', 'b.BgRzwF0VdxcX.Vl83zESwaJbh9SKW'))
+var con = neo4j.driver(process.env.NEO_BOLT_URL, neo4j.auth.basic(process.env.NEO_USERNAME, process.env.NEO_PASSWORD))
 var session = con.session()
 
 module.exports = session
