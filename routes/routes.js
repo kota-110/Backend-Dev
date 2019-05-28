@@ -1,23 +1,23 @@
 'use strict';
 
 module.exports = function(app) {
-    var attractionList = require('./controllers/controller');
+    var attractionController = require('./controllers/controller');
 
     app.route('/')
-        .get(attractionList.index);
+        .get(attractionController.index);
 
     app.route('/attractions')
-        .get(attractionList.attractions);
+        .get(attractionController.attractions);
 
     app.route('/attractions/:attraction_name')
-        .get(attractionList.findAttractionsByName);
+        .get(attractionController.findAttractionsByName);
 
     app.route('/attractions')
-        .post(attractionList.createAttraction);
+        .post(attractionController.createAttraction);
 
     app.route('/attractions')
-        .put(attractionList.updateAttraction);
+        .put(attractionController.updateAttraction);
 
     app.route('/attractions')
-        .delete(attractionList.deleteAttraction);
+        .delete(attractionController.deleteAttraction);
 };
