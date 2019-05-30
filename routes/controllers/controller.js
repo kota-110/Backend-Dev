@@ -43,12 +43,14 @@ exports.createAttraction = function(req, res) {
     var attraction_desc = req.body.attraction_desc;
     var attraction_lat = req.body.attraction_lat;
     var attraction_lng = req.body.attraction_lng;
+    var attraction_lng = req.body.attraction_photo;
 
     connection
     .run("CREATE (t:TempatWisata { NamaTempatWisata: '"+attraction_name+
                                 "', DeskripsiTempatWisata: '"+attraction_desc+
                                 "', Latitude: '"+attraction_lat+
-                                "', Longitude: '"+attraction_lng+"'})")
+                                "', Latitude: '"+attraction_lng+
+                                "', PhotoURL: '"+attraction_photo+"'})")
     .then(function(result){    
             response.ok("Berhasil menambahkan Tempat Wisata!", res);    
             connection.close();            
@@ -65,6 +67,7 @@ exports.updateAttraction = function(req, res) {
     var attraction_updt_desc = req.body.attraction_updt_desc;            //updated attraction desc
     var attraction_updt_lat = req.body.attraction_updt_lat;              //updated attraction latitude
     var attraction_updt_lng = req.body.attraction_updt_lng;              //updated attraction longitude
+    var attraction_photo_url = req.body.attraction_updt_photo;              //updated attraction photo
 
     connection
     .run("MATCH (t { NamaTempatWisata: '"+ attraction_cur_name
@@ -72,6 +75,7 @@ exports.updateAttraction = function(req, res) {
     +"', DeskripsiTempatWisata: '"+ attraction_updt_desc
     +"', Latitude: '"+ attraction_updt_lat
     +"', Longitude: '"+ attraction_updt_lng
+    +"', PhotoURL: '"+ attraction_updt_lng
     +"' }")
     .then(function(result){    
             response.ok("Berhasil memperbarui Tempat Wisata!", res);    
