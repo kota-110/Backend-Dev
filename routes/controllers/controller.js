@@ -49,7 +49,7 @@ exports.createAttraction = function(req, res) {
     .run("CREATE (t:TempatWisata { NamaTempatWisata: '"+attraction_name+
                                 "', DeskripsiTempatWisata: '"+attraction_desc+
                                 "', Latitude: '"+attraction_lat+
-                                "', Latitude: '"+attraction_lng+
+                                "', Longitude: '"+attraction_lng+
                                 "', PhotoURL: '"+attraction_photo+"'})")
     .then(function(result){    
             response.ok("Berhasil menambahkan Tempat Wisata!", res);    
