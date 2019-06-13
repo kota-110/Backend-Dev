@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = function(app) {
-    var attractionController = require('./controllers/controller');
+    var attractionController = require('./controllers/attraction');
+    var recomendationController = require('./controllers/recomendation');
 
     app.route('/')
         .get(attractionController.index);
@@ -20,4 +21,7 @@ module.exports = function(app) {
 
     app.route('/attractions')
         .delete(attractionController.deleteAttraction);
+
+    app.route('/recomendation/:locations')
+        .get(recomendationController.searchRecomendation);
 };
