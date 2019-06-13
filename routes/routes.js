@@ -22,6 +22,6 @@ module.exports = function(app) {
     app.route('/attractions')
         .delete(attractionController.deleteAttraction);
 
-    app.route('/recomendation/:locations')
+    app.route('/recomendation')
         .get(recomendationController.searchRecomendation);
 };
