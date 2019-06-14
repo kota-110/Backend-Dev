@@ -19,12 +19,12 @@ exports.attractions = function(req, res){
     var queryResp = [];
 };
 
-exports.findAttractionsByName = function(req, res){
+exports.findAttractionsByCategory = function(req, res){
 
-    var keyword = req.params.attraction_name;
+    var keyword = req.params.attraction_category;
 
     connection
-    .run("MATCH (t:TempatWisata) WHERE t.NamaTempatWisata =~ '.*(?i)"+keyword+".*' RETURN t")
+    .run("MATCH (t:TempatWisata) WHERE t.kategoriWisata =~ '.*(?i)"+keyword+".*' RETURN t")
     .then(function(result){        
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                

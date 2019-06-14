@@ -10,8 +10,8 @@ module.exports = function(app) {
     app.route('/attractions')
         .get(attractionController.attractions);
 
-    app.route('/attractions/:attraction_name')
-        .get(attractionController.findAttractionsByName);
+    app.route('/attractions/:attraction_category')
+        .get(attractionController.findAttractionsByCategory);
 
     app.route('/attractions')
         .post(attractionController.createAttraction);
