@@ -31,4 +31,7 @@ module.exports = function(app) {
 
     app.route('/train')
         .get(tiketcomController.searchTrain);
+
+    app.route('/station')
+        .get(tiketcomController.searchStation);
 };
