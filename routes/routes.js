@@ -3,6 +3,7 @@
 module.exports = function(app) {
     var attractionController = require('./controllers/attraction');
     var recomendationController = require('./controllers/recomendation');
+    var tiketcomController = require('./controllers/tiketcom');
 
     app.route('/')
         .get(attractionController.index);
@@ -24,4 +25,7 @@ module.exports = function(app) {
 
     app.route('/recomendation')
         .get(recomendationController.searchRecomendation);
+
+    app.route('/nearestairport')
+        .get(tiketcomController.getNearestAirport);
 };
