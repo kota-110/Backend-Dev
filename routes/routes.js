@@ -28,4 +28,7 @@ module.exports = function(app) {
 
     app.route('/nearestairport')
         .get(tiketcomController.getNearestAirport);
+
+    app.route('/train')
+        .get(tiketcomController.searchTrain);
 };
