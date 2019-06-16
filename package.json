@@ -21,6 +21,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "morgan": "*",
-    "neo4j-driver": "*"
+    "neo4j-driver": "*",
+    "request": "^2.88.0"
   }
 }
