@@ -3,7 +3,7 @@
 module.exports = function(app) {
     var attractionController = require('./controllers/attraction');
     var recomendationController = require('./controllers/recomendation');
-    var tiketcomController = require('./controllers/tiketcom');
+    var tiketcomService = require('../services/tiketcom');
 
     app.route('/')
         .get(attractionController.index);
@@ -27,11 +27,11 @@ module.exports = function(app) {
         .get(recomendationController.searchRecomendation);
 
     app.route('/nearestairport')
-        .get(tiketcomController.getNearestAirport);
+        .get(tiketcomService.getNearestAirport);
 
     app.route('/train')
-        .get(tiketcomController.searchTrain);
+        .get(tiketcomService.searchTrain);
 
     app.route('/station')
-        .get(tiketcomController.searchStation);
+        .get(tiketcomService.searchStation);
 };

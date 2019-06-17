@@ -1,9 +1,7 @@
 'use strict';
 
-var response = require('../../db/res');
+var response = require('../db/res');
 var Request = require("request");
-
-https://api-sandbox.tiket.com/train_api/train_station?token=e5c768171ff1ac186b2881e90c7f976320d4c285&output=json
 
 exports.getNearestAirport = function(req, res){
     Request.get('http://api-sandbox.tiket.com/flight_api/'
@@ -14,7 +12,7 @@ exports.getNearestAirport = function(req, res){
         }
         console.log(JSON.parse(body));
         response.ok(JSON.parse(body), res)
-    });    
+    });
 };
 
 exports.searchTrain = function(req, res){

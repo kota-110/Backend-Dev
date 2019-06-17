@@ -44,13 +44,25 @@ exports.createAttraction = function(req, res) {
     var attraction_lat = req.body.attraction_lat;
     var attraction_lng = req.body.attraction_lng;
     var attraction_photo = req.body.attraction_photo;
+    var attraction_category = req.body.attraction_category;
+    var attraction_address = req.body.attraction_address;
+    var attraction_open = req.body.attraction_open;
+    var attraction_closed = req.body.attraction_closed;
+    var attraction_code = req.body.attraction_code;
+    var attraction_facility = req.body.attraction_facility;
 
     connection
-    .run("CREATE (t:TempatWisata { NamaTempatWisata: '"+attraction_name+
-                                "', DeskripsiTempatWisata: '"+attraction_desc+
-                                "', Latitude: '"+attraction_lat+
-                                "', Longitude: '"+attraction_lng+
-                                "', PhotoURL: '"+attraction_photo+"'})")
+    .run("CREATE (t:TempatWisata { namaWisata: '"+attraction_name+
+                                "', deskripsi: '"+attraction_desc+
+                                "', latitude: '"+attraction_lat+
+                                "', longitude: '"+attraction_lng+
+                                "', alamat: '"+attraction_address+
+                                "', fasilitas: '"+attraction_facility+
+                                "', kdWisata: '"+attraction_code+
+                                "', jamBuka: '"+attraction_open+
+                                "', jamTutup: '"+attraction_closed+
+                                "', kategoriWisata: '"+attraction_category+
+                                "', imageUrl: '"+attraction_photo+"'})")
     .then(function(result){    
             response.ok("Berhasil menambahkan Tempat Wisata!", res);    
             connection.close();            
@@ -68,14 +80,27 @@ exports.updateAttraction = function(req, res) {
     var attraction_updt_lat = req.body.attraction_updt_lat;              //updated attraction latitude
     var attraction_updt_lng = req.body.attraction_updt_lng;              //updated attraction longitude
     var attraction_updt_photo = req.body.attraction_updt_photo;              //updated attraction photo
+    var attraction_updt_category = req.body.attraction_updt_category;
+    var attraction_updt_address = req.body.attraction_updt_address;
+    var attraction_updt_open = req.body.attraction_updt_open;
+    var attraction_updt_closed = req.body.attraction_updt_closed;
+    var attraction_updt_code = req.body.attraction_updt_code;
+    var attraction_updt_facility = req.body.attraction_updt_facility;
+
 
     connection
-    .run("MATCH (t { NamaTempatWisata: '"+ attraction_cur_name
-    +"' }) SET t = { NamaTempatWisata: '"+ attraction_updt_name
-    +"', DeskripsiTempatWisata: '"+ attraction_updt_desc
-    +"', Latitude: '"+ attraction_updt_lat
-    +"', Longitude: '"+ attraction_updt_lng
-    +"', PhotoURL: '"+ attraction_updt_photo
+    .run("MATCH (t { namaWisata: '"+ attraction_cur_name
+    +"' }) SET t = { namaWisata: '"+ attraction_updt_name
+    +"', deskripsi: '"+ attraction_updt_desc
+    +"', latitude: '"+ attraction_updt_lat
+    +"', longitude: '"+ attraction_updt_lng
+    +"', imageUrl: '"+ attraction_updt_photo
+    +"', kdWisata: '"+ attraction_updt_code
+    +"', fasilitas: '"+ attraction_updt_facility
+    +"', alamat: '"+ attraction_updt_address
+    +"', jamBuka: '"+ attraction_updt_open
+    +"', jamTutup: '"+ attraction_updt_closed
+    +"', kategoriWisata: '"+ attraction_updt_category
     +"' }")
     .then(function(result){    
             response.ok("Berhasil memperbarui Tempat Wisata!", res);    
@@ -91,7 +116,7 @@ exports.deleteAttraction = function(req, res) {
     var attraction_name = req.body.attraction_name;
 
     connection
-    .run("MATCH (t:TempatWisata { NamaTempatWisata: '"+ attraction_name +"' }) DELETE t")
+    .run("MATCH (t:TempatWisata { namaWisata: '"+ attraction_name +"' }) DELETE t")
     .then(function(result){    
             response.ok("Berhasil menghapus Tempat Wisata!", res);    
             connection.close();            
