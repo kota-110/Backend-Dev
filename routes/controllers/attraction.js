@@ -37,6 +37,24 @@ exports.findAttractionsByCategory = function(req, res){
     var queryResp = [];
 };
 
+exports.findAttractionsByName = function(req, res){
+
+    var keyword = req.params.attraction_name;
+
+    connection
+    .run("MATCH (t:TempatWisata) WHERE t.namaWisata =~ '.*(?i)"+keyword+".*' RETURN t")
+    .then(function(result){        
+            result.records.forEach(function(record){                
+                queryResp.push(record._fields[0].properties)                
+            })
+            response.ok(queryResp, res);            
+    })
+    .catch(function(err){
+        console.log(err)
+    });
+    var queryResp = [];
+};
+
 exports.createAttraction = function(req, res) {
     
     var attraction_name = req.body.attraction_name;
