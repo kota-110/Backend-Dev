@@ -1,36 +1,38 @@
 class Recomendations{
     
-    constructor(message){
-        this.message = message
+    constructor(){
+        let transportationList = {}
     }
+    
+    getTransportation() {
+        const connection = require('../db/connection/conn');                
+        const TransportationRoute = require('../core/transportationRoute')
+        var queryResp = [];
 
-    getTransportationRoute(){
-        let trans1 = [1,2,3,4,5]
-        let trans2 = [3,4,5,6,7,8]
-        let trans3 = [9,10,11,12,15,16]
+        let tRoute = new TransportationRoute()
 
-        let transNRoute = {}        
+        connection
+        .run("MATCH (n:Transportation) RETURN {jurusan: n.jurusan, trayek: n.trayek}")
+        .then(function(result){
+                result.records.forEach(function(record){                                    
+                    queryResp.push(record._fields[0])                    
+                })                   
+        })
+        .catch(function(err){
+            console.log(err)
+        });                
+        return tRoute.getTRoute()
+    };
 
-        transNRoute[0] = trans1
-        transNRoute[1] = trans2
-        transNRoute[2] = trans3
-
-        let route = [1,2,4,8,10,12,16]    
-
-        for (let i=0;i<route.length;i++){
-            for (let j in transNRoute){
-                for (let k=0;k<transNRoute[j].length;k++){
-                    if (route[i] == transNRoute[j][k]){
-                        console.log(route[i])
-                    }                    
-                }
-            }
-        }
-
+    setTransportationRoute(){
+        transportationList["Cibogo Caheum"] = [21,22,26,30]
+        transportationList["Sarijadi Cibogo"] = [6,7,11,12,13,14,15,19]
+        transportationList["Polban Sarijadi"] = [5,6,7,8,9,10,18,19]        
+        transportationList["Gerlong Polban"] = [1,2,3,5,6]        
     }
 
     searchTransportation() {
-        return "This message will print "+this.message
+        return this.transportationList
     }
 
 }

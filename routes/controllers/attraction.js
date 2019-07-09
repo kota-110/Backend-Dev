@@ -47,7 +47,7 @@ exports.findAttractionsByName = function(req, res){
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
             })
-            response.ok(queryResp, res);            
+            response.ok(queryResp, res);
     })
     .catch(function(err){
         console.log(err)

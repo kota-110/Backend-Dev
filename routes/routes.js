@@ -3,7 +3,7 @@
 module.exports = function(app) {
     var attractionController = require('./controllers/attraction');
     var recomendationController = require('./controllers/recomendation');
-    var tiketcomService = require('../services/tiketcom');
+    var tiketcomService = require('../services/tiketcom');    
 
     app.route('/')
         .get(attractionController.index);
@@ -40,4 +40,8 @@ module.exports = function(app) {
 
     app.route('/poi')
         .get(recomendationController.pointOfInterest);
+
+    app.route('/transportation')
+        .get(recomendationController.transportation);
+
 };
