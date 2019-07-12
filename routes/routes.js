@@ -2,7 +2,7 @@
 
 module.exports = function(app) {
     var attractionController = require('./controllers/attraction');
-    var recomendationController = require('./controllers/recomendation');
+    var recomendationController = require('./controllers/recomendation');    
     var tiketcomService = require('../services/tiketcom');    
 
     app.route('/')
@@ -14,8 +14,8 @@ module.exports = function(app) {
     app.route('/attractions/:attraction_category')
         .get(attractionController.findAttractionsByCategory);
 
-    app.route('/attractions/:attraction_name')
-        .get(attractionController.findAttractionsByName);
+    app.route('/attractions/filter/:attraction_code')
+        .get(attractionController.findAttractionsByCode);
 
     app.route('/attractions')
         .post(attractionController.createAttraction);
@@ -25,9 +25,6 @@ module.exports = function(app) {
 
     app.route('/attractions')
         .delete(attractionController.deleteAttraction);
-
-    app.route('/recomendation/:firstLat/:firstLng/:secondLat/:secondLng')
-        .get(recomendationController.searchRecomendation);
 
     app.route('/nearestairport')
         .get(tiketcomService.getNearestAirport);
@@ -41,7 +38,7 @@ module.exports = function(app) {
     app.route('/poi')
         .get(recomendationController.pointOfInterest);
 
-    app.route('/transportation')
-        .get(recomendationController.transportation);
+    app.route('/recomendation/:firstLat/:firstLon/:secondLat/:secondLon')
+        .get(recomendationController.searchRecomendation);
 
 };

@@ -24,7 +24,7 @@ exports.findAttractionsByCategory = function(req, res){
     var keyword = req.params.attraction_category;
 
     connection
-    .run("MATCH (t:TempatWisata) WHERE t.kategoriWisata =~ '.*(?i)"+keyword+".*' RETURN t")
+    .run("MATCH (t:TempatWisata) WHERE t.kategoriWisata =~ '.*(?i)"+keyword+".*' RETURN t")    
     .then(function(result){        
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
@@ -37,17 +37,18 @@ exports.findAttractionsByCategory = function(req, res){
     var queryResp = [];
 };
 
-exports.findAttractionsByName = function(req, res){
+exports.findAttractionsByCode = function(req, res){
 
-    var keyword = req.params.attraction_name;
+    var keyword = req.params.attraction_code;
 
-    connection
-    .run("MATCH (t:TempatWisata) WHERE t.namaWisata =~ '.*(?i)"+keyword+".*' RETURN t")
+    connection    
+    .run("MATCH (t:TempatWisata) WHERE t.kdWisata = '"+keyword+"' RETURN t")
     .then(function(result){        
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
             })
-            response.ok(queryResp, res);
+            console.log("kosong")
+            response.ok(queryResp, res);            
     })
     .catch(function(err){
         console.log(err)
@@ -92,7 +93,7 @@ exports.createAttraction = function(req, res) {
 
 exports.updateAttraction = function(req, res) {
     
-    var attraction_cur_name = req.body.attraction_cur_name;             //current attraction name
+    // var attraction_cur_name = req.body.attraction_cur_name;             //current attraction name
     var attraction_updt_name = req.body.attraction_updt_name;            //updated attraction name
     var attraction_updt_desc = req.body.attraction_updt_desc;            //updated attraction desc
     var attraction_updt_lat = req.body.attraction_updt_lat;              //updated attraction latitude
