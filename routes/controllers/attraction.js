@@ -93,7 +93,8 @@ exports.createAttraction = function(req, res) {
 
 exports.updateAttraction = function(req, res) {
     
-    // var attraction_cur_name = req.body.attraction_cur_name;             //current attraction name
+    var attraction_code = req.body.attraction_code;             //current attrac
+    // var attraction_updt_code = req.body.attraction_updt_code;
     var attraction_updt_name = req.body.attraction_updt_name;            //updated attraction name
     var attraction_updt_desc = req.body.attraction_updt_desc;            //updated attraction desc
     var attraction_updt_lat = req.body.attraction_updt_lat;              //updated attraction latitude
@@ -102,19 +103,18 @@ exports.updateAttraction = function(req, res) {
     var attraction_updt_category = req.body.attraction_updt_category;
     var attraction_updt_address = req.body.attraction_updt_address;
     var attraction_updt_open = req.body.attraction_updt_open;
-    var attraction_updt_closed = req.body.attraction_updt_closed;
-    var attraction_updt_code = req.body.attraction_updt_code;
+    var attraction_updt_closed = req.body.attraction_updt_closed;    
     var attraction_updt_facility = req.body.attraction_updt_facility;
 
 
     connection
-    .run("MATCH (t { namaWisata: '"+ attraction_cur_name
+    .run("MATCH (t { kdWisata: '"+ attraction_code
     +"' }) SET t = { namaWisata: '"+ attraction_updt_name
     +"', deskripsi: '"+ attraction_updt_desc
     +"', latitude: '"+ attraction_updt_lat
     +"', longitude: '"+ attraction_updt_lng
     +"', imageUrl: '"+ attraction_updt_photo
-    +"', kdWisata: '"+ attraction_updt_code
+    // +"', kdWisata: '"+ attraction_updt_code
     +"', fasilitas: '"+ attraction_updt_facility
     +"', alamat: '"+ attraction_updt_address
     +"', jamBuka: '"+ attraction_updt_open
