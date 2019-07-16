@@ -11,7 +11,7 @@ exports.attractions = function(req, res){
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
             })
-            response.ok(queryResp, res)
+            response.okpoi(queryResp, res)
     })
     .catch(function(err){
         console.log(err)
@@ -29,7 +29,7 @@ exports.findAttractionsByCategory = function(req, res){
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
             })
-            response.ok(queryResp, res);            
+            response.okpoi(queryResp, res);            
     })
     .catch(function(err){
         console.log(err)
@@ -48,7 +48,7 @@ exports.findAttractionsByCode = function(req, res){
                 queryResp.push(record._fields[0].properties)                
             })
             console.log("kosong")
-            response.ok(queryResp, res);            
+            response.okpoi(queryResp, res);            
     })
     .catch(function(err){
         console.log(err)
@@ -83,7 +83,7 @@ exports.createAttraction = function(req, res) {
                                 "', kategoriWisata: '"+attraction_category+
                                 "', imageUrl: '"+attraction_photo+"'})")
     .then(function(result){    
-            response.ok("Berhasil menambahkan Tempat Wisata!", res);    
+            response.okpoi("Berhasil menambahkan Tempat Wisata!", res);    
             connection.close();            
     })
     .catch(function(err){
@@ -122,7 +122,7 @@ exports.updateAttraction = function(req, res) {
     +"', kategoriWisata: '"+ attraction_updt_category
     +"' }")
     .then(function(result){    
-            response.ok("Berhasil memperbarui Tempat Wisata!", res);    
+            response.okpoi("Berhasil memperbarui Tempat Wisata!", res);    
             connection.close();            
     })
     .catch(function(err){
@@ -137,7 +137,7 @@ exports.deleteAttraction = function(req, res) {
     connection
     .run("MATCH (t:TempatWisata { namaWisata: '"+ attraction_name +"' }) DELETE t")
     .then(function(result){    
-            response.ok("Berhasil menghapus Tempat Wisata!", res);    
+            response.okpoi("Berhasil menghapus Tempat Wisata!", res);    
             connection.close();            
     })
     .catch(function(err){
@@ -146,5 +146,5 @@ exports.deleteAttraction = function(req, res) {
 };
 
 exports.index = function(req, res) {
-    response.ok("Hai Gais !", res)
+    response.okpoi("Hai Gais !", res)
 };
