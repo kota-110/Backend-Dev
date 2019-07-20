@@ -2,7 +2,7 @@
 
 var response = require('../../db/res');
 var connection = require('../../db/connection/conn');
-var queryResp = [];                     //array for storing array of response
+let queryResp = []
 
 exports.attractions = function(req, res){
     connection
@@ -22,9 +22,9 @@ exports.attractions = function(req, res){
 exports.findAttractionsByCategory = function(req, res){
 
     var keyword = req.params.attraction_category;
-
+    
     connection
-    .run("MATCH (t:TempatWisata) WHERE t.kategoriWisata =~ '.*(?i)"+keyword+".*' RETURN t")    
+    .run("MATCH (t:TempatWisata) WHERE t.kategoriWisata =~ '.*(?i)"+keyword+".*' RETURN t")
     .then(function(result){        
             result.records.forEach(function(record){                
                 queryResp.push(record._fields[0].properties)                
@@ -41,19 +41,24 @@ exports.findAttractionsByCode = function(req, res){
 
     var keyword = req.params.attraction_code;
 
-    connection    
-    .run("MATCH (t:TempatWisata) WHERE t.kdWisata = '"+keyword+"' RETURN t")
-    .then(function(result){        
-            result.records.forEach(function(record){                
-                queryResp.push(record._fields[0].properties)                
+    let temp = []   
+    let promises = [] 
+    let exLength = 4
+
+    for (let i=2;i<=exLength;i++){
+        promises.push(connection.run("MATCH (t:TempatWisata) WHERE t.kdWisata = '0"+i+"' RETURN t"))
+    }        
+    
+    connection.run("MATCH (t:TempatWisata) WHERE t.kdWisata = '"+keyword+"' RETURN t")    
+    .then(function(result){                    
+            result.forEach(function(record){                
+                queryResp.push(record._fields[0].properties)                                                
             })
-            console.log("kosong")
-            response.okpoi(queryResp, res);            
+            response.okpoi(queryResp, res);
     })
     .catch(function(err){
         console.log(err)
-    });
-    var queryResp = [];
+    });    
 };
 
 exports.createAttraction = function(req, res) {
@@ -114,7 +119,7 @@ exports.updateAttraction = function(req, res) {
     +"', latitude: '"+ attraction_updt_lat
     +"', longitude: '"+ attraction_updt_lng
     +"', imageUrl: '"+ attraction_updt_photo
-    // +"', kdWisata: '"+ attraction_updt_code
+    +"', kdWisata: '"+ attraction_code
     +"', fasilitas: '"+ attraction_updt_facility
     +"', alamat: '"+ attraction_updt_address
     +"', jamBuka: '"+ attraction_updt_open
