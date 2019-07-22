@@ -40,25 +40,18 @@ exports.findAttractionsByCategory = function(req, res){
 exports.findAttractionsByCode = function(req, res){
 
     var keyword = req.params.attraction_code;
-
-    let temp = []   
-    let promises = [] 
-    let exLength = 4
-
-    for (let i=2;i<=exLength;i++){
-        promises.push(connection.run("MATCH (t:TempatWisata) WHERE t.kdWisata = '0"+i+"' RETURN t"))
-    }        
     
     connection.run("MATCH (t:TempatWisata) WHERE t.kdWisata = '"+keyword+"' RETURN t")    
     .then(function(result){                    
-            result.forEach(function(record){                
-                queryResp.push(record._fields[0].properties)                                                
-            })
-            response.okpoi(queryResp, res);
+        result.records.forEach(function(record){                
+            queryResp.push(record._fields[0].properties)                
+        })
+        response.okpoi(queryResp, res);
     })
     .catch(function(err){
         console.log(err)
     });    
+    var queryResp = [];
 };
 
 exports.createAttraction = function(req, res) {
